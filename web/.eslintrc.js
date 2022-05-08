@@ -30,6 +30,7 @@ function convertOverridesToArray(overrides) {
 /** @type {import('eslint').Linter.Config} */
 const newConfig = Object.assign({}, config, {
   extends: [...config.extends, 'react-app/jest', 'plugin:prettier/recommended'],
+  
   rules: Object.assign(updateWarnRulesToErrorRules(config.rules), {
     'react/jsx-boolean-value': ['error', 'always'],
     'react/jsx-key': 'error',
@@ -37,6 +38,7 @@ const newConfig = Object.assign({}, config, {
     'react/self-closing-comp': 'error',
     'react/no-string-refs': 'error',
     'constructor-super': 'error',
+    'prettier/prettier': ['error', {'endOfLine': 'auto'}],
     curly: 'error',
     'dot-notation': 'error',
     'guard-for-in': 'error',
@@ -125,5 +127,6 @@ const newConfig = Object.assign({}, config, {
     });
   }),
 });
+
 
 module.exports = newConfig;

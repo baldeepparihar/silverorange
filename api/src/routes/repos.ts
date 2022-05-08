@@ -16,6 +16,10 @@ repos.get('/', async (_: Request, res: Response) => {
 
   let resp = await axios('https://api.github.com/users/silverorange/repos');
 
+  // Was getting CORS error
+  // Tried using headers with "Access-Control-Allow-Origin": "localhost://3000"
+  // That didn't work.  I found this and it worked.  
+  // This is beyond my knowledge level but I understand it sets the headers to allow cross origin requests
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Max-Age", "1800");
