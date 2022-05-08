@@ -34,6 +34,7 @@ function normalizePort(val: string | number): number | string | boolean {
 }
 
 const port = normalizePort(config.server.port);
+
 app.set('port', port);
 
 const server = createServer(app);
