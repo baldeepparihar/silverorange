@@ -6,8 +6,8 @@ export const repos = Router();
 
 repos.get('/', async (_: Request, res: Response) => {
   
-  res.header('Cache-Control', 'no-store');
-  res.status(200);
+  
+  
   // TODO: See README.md Task (A). Return repo data here. You’ve got this!
 
   // Axios was defaulting to port 80, so I changed the baseURL to localhost:4000
@@ -15,10 +15,19 @@ repos.get('/', async (_: Request, res: Response) => {
   try {
 
   let resp = await axios('https://api.github.com/users/silverorange/repos');
+
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Max-Age", "1800");
+  res.setHeader("Access-Control-Allow-Headers", "content-type");
+  res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
+
+  res.header('Cache-Control', 'no-store');
+  res.status(200);
   res.json(resp.data);
 
 } catch(e) {
-
+  res.status(400).json("Bad Request");
   res.json(e);
 
 }
