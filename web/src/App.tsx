@@ -5,6 +5,7 @@ import axios from 'axios';
 export function App() {
   const [repos, setRepos] = useState([]);
   const [filtered, setFiltered] = useState([]);
+  const [langFiltered, setLangFiltered] = useState([]);
   const [languageFilter, setLanguageFilter] = useState(false);
   const [visible, setVisible] = useState(false);
 
