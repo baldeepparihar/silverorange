@@ -30,10 +30,10 @@ h1 {
     outline: none;
     -webkit-box-shadow: 7px 10px 19px 3px rgba(255,164,33,0.78); 
     box-shadow: 7px 10px 19px 3px rgba(255,164,33,0.78);
-    transition: .3s all ease-in-out;
+    transition: .2s all ease-in-out;
 }
 .card:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
 }
 .gray-100 {
     text-transform: uppercase;
@@ -49,4 +49,14 @@ p {
 }
 .btn:hover {
     cursor: pointer;
+}
+.display {
+    display: inline-block;
+    visibility: visible;
+    margin-left: 10px;
+}
+.no-display {
+    display: none;
+    visibility: hidden;
+    margin: 0;
 }

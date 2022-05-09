@@ -6,6 +6,7 @@ export function App() {
   const [repos, setRepos] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [langFiltered, setLangFiltered] = useState([]);
+  const [displayedList, setDisplayedList] = useState([]);
   const [languageFilter, setLanguageFilter] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -21,6 +22,7 @@ export function App() {
       .then((res) => {
         setRepos(res.data);
         filterRepos(res.data);
+        setLanguageFilter(false);
       })
       .catch((err) => console.log(err));
   };
@@ -30,8 +32,9 @@ export function App() {
   const filterRepos = (array) => {
     const filteredRepos = array?.filter((el) => el.fork === false)
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    
     setFiltered(filteredRepos);
+    setDisplayedList(filteredRepos);
+    setLanguageFilter(true);
   };
   console.log(filtered);
 
@@ -40,11 +43,13 @@ export function App() {
   const filterLanguage = (e, array) => {
     
     const lang = array.filter(el => el.language === e.target.innerHTML.toString());
+    setDisplayedList(lang);
+    setLanguageFilter(true);
     console.log(lang)
   }
 
 
-  const userInfo = filtered.map((repo, idx) => {
+  const userInfo = displayedList.map((repo, idx) => {
     const { name, description, language, forks_count, owner } = repo;
 
     return (
@@ -61,6 +66,11 @@ export function App() {
                 onClick={(e) => {filterLanguage(e, filtered)}}
                 className="btn btn-secondary">
                      { language}
+              </button>
+              <button 
+                onClick={() => {getRepos()}}
+                className={languageFilter === false ? "btn btn-secondary no-display" : "btn btn-secondary display"}>
+                     Original List
               </button>
             </div>
         </div>
