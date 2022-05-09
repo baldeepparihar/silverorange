@@ -36,12 +36,6 @@ export function App() {
   };
   console.log(filtered);
 
-  const sortDates = (array) => {
-    const sortedArray = array.sort((date1, date2) => date1 - date2);
-    return sortedArray;
-  }
-  
-
 
 
 
