@@ -5,6 +5,7 @@ import axios from 'axios';
 export function App() {
   const [repos, setRepos] = useState([]);
   const [filtered, setFiltered] = useState([]);
+  const [visible, setVisible] = useState(false);
 
   // interface repo {
   //   fork: boolean;
@@ -28,39 +29,50 @@ export function App() {
 
   // Filter the repos so only repos with fork set to false display
   const filterRepos = (array) => {
-    const filteredRepos = array?.filter((el) => el.fork === false);
+    const filteredRepos = array?.filter((el) => el.fork === false)
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    
     setFiltered(filteredRepos);
   };
   console.log(filtered);
 
+  const sortDates = (array) => {
+    const sortedArray = array.sort((date1, date2) => date1 - date2);
+    return sortedArray;
+  }
+  
+
+
+
+
+
   const userInfo = filtered.map((repo, idx) => {
-    const { owner } = repo;
+    const { name, description, language, forks_count, owner } = repo;
 
     return (
       <div key={idx}>
-        <div>
-          <img src={owner.avatar_url} alt="" />
-          <div>
-            <p>{owner.login}</p>
-          </div>
+        <div className="row card">
+          <img className="image" src={owner.avatar_url} alt="" />
+            <div className="col justify-content-start">
+              <p className="gray-100"><span className="text-black-50">Repository Name: </span>{name}</p>
+              <p className="gray-100"><span className="text-black-50">Repository Description: </span>{description}</p>
+              <p className="gray-100"><span className="text-black-50">Repository Language: </span>{language}</p>
+              <p className="gray-100"><span className="text-black-50">Repository Forks: </span>{forks_count}</p>
+              <p className="gray-100"><span className="text-black-50">Date: </span>{repo.created_at}</p>
+            </div>
         </div>
-        
+        <div>
+
+        </div>
       </div>
     );
   });
   console.log('User Info: ', userInfo);
 
-  // const ownerInfo = userInfo.map((owner) => (
-  //     <div>
-  //       <p>{owner.avatar_url}</p>
-  //     </div>
-  //   )
-  // );
-
   return (
     <div className="App">
-      <h1>Hello World</h1>
-      <h1>{userInfo}</h1>
+      <h1>Thank you for taking the time to view this project!</h1>
+      <div>{userInfo}</div>
     </div>
   );
 }
