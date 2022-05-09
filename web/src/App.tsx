@@ -5,11 +5,9 @@ import axios from 'axios';
 export function App() {
   const [repos, setRepos] = useState([]);
   const [filtered, setFiltered] = useState([]);
+  const [languageFilter, setLanguageFilter] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  // interface repo {
-  //   fork: boolean;
-  // }
 
   useEffect(() => {
     getRepos();
@@ -37,7 +35,12 @@ export function App() {
   console.log(filtered);
 
 
-
+  // Filter by language
+  const filterLanguage = (e, array) => {
+    
+    const lang = array.filter(el => el.language === e.target.innerHTML.toString());
+    console.log(lang)
+  }
 
 
   const userInfo = filtered.map((repo, idx) => {
@@ -50,9 +53,14 @@ export function App() {
             <div className="col justify-content-start">
               <p className="gray-100"><span className="text-black-50">Repository Name: </span>{name}</p>
               <p className="gray-100"><span className="text-black-50">Repository Description: </span>{description}</p>
-              <p className="gray-100"><span className="text-black-50">Repository Language: </span>{language}</p>
               <p className="gray-100"><span className="text-black-50">Repository Forks: </span>{forks_count}</p>
               <p className="gray-100"><span className="text-black-50">Date: </span>{repo.created_at}</p>
+              <span className="text-black-50 gray-100">Repository Language: </span>
+              <button 
+                onClick={(e) => {filterLanguage(e, filtered)}}
+                className="btn btn-secondary">
+                     { language}
+              </button>
             </div>
         </div>
         <div>
