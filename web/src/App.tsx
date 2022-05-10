@@ -48,10 +48,17 @@ export function App() {
     console.log(lang)
   }
 
-  const collapseFunction = () => {
-    if(collapse === false) setCollapse(true);
-    if(collapse === true) setCollapse(false);
+  const collapseFunction = (e) => {
+    const collapsibleDiv = e.target.nextElementSibling;
+    if(collapsibleDiv.classList.contains('show')) {
+      collapsibleDiv.classList.remove('show');
+    } else {
+      collapsibleDiv.classList.add('show');
+    };
+    // if(collapse === false) setCollapse(true);
+    // if(collapse === true) setCollapse(false);
   }
+
 
 
   const userInfo = displayedList.map((repo, idx) => {
@@ -60,8 +67,9 @@ export function App() {
     return (
       <div key={idx}>
         <div 
-          onClick={() => {collapseFunction()}}
-          className="row card">
+          onClick={(e) => {collapseFunction(e)}}
+          className="row card"
+          >
           <img className="image" src={owner.avatar_url} alt="" />
             <div className="col justify-content-start">
               <p className="gray-400"><span className="text-black-50">Repository Name: </span>{name}</p>
@@ -79,8 +87,7 @@ export function App() {
                      Original List
               </button>
             </div>
-            <div 
-              className={collapse === false ? "collapse" : "collapse.show hidden-container"}>
+            <div className="collapse hidden-container">
               <p className="gray-400 hidden-p"><span className="text-black-50 hidden-span">Recent Commit Date: </span>{repo.created_at}</p>
               <p className="gray-400 hidden-p"><span className="text-black-50 hidden-span">Author: </span>{owner.login}</p>
               <p className="gray-400 hidden-p"><span className="text-black-50 hidden-span">Message: </span>Happy Coding!!!</p>
@@ -89,7 +96,6 @@ export function App() {
       </div>
     );
   });
-  console.log('User Info: ', userInfo);
 
   return (
     <div className="App">
