@@ -5,12 +5,8 @@ import axios from 'axios';
 export function App() {
   const [repos, setRepos] = useState([]);
   const [sorted, setSorted] = useState([]);
-  const [langFiltered, setLangFiltered] = useState([]);
   const [displayedList, setDisplayedList] = useState([]);
   const [languageFilter, setLanguageFilter] = useState(false);
-  const [collapse, setCollapse] = useState(false);
-  const [visible, setVisible] = useState(false);
-
 
   useEffect(() => {
     getRepos();
@@ -27,7 +23,6 @@ export function App() {
       })
       .catch((err) => console.log(err));
   };
-  console.log(repos);
 
   // Sort the repos in reverse chronological order
   const sortRepos = (array) => {
@@ -36,7 +31,6 @@ export function App() {
     setDisplayedList(sortedRepos);
     setLanguageFilter(true);
   };
-  console.log(sorted);
 
 
   // Filter by language
@@ -45,9 +39,9 @@ export function App() {
     const lang = array.filter(el => el.language === e.target.innerHTML.toString());
     setDisplayedList(lang);
     setLanguageFilter(true);
-    console.log(lang)
   }
 
+  // Vanilla JavaScript and Bootstrap collapsible div
   const collapseFunction = (e) => {
     const collapsibleDiv = e.target.nextElementSibling;
     if(collapsibleDiv.classList.contains('show')) {
@@ -55,8 +49,6 @@ export function App() {
     } else {
       collapsibleDiv.classList.add('show');
     };
-    // if(collapse === false) setCollapse(true);
-    // if(collapse === true) setCollapse(false);
   }
 
 
@@ -100,6 +92,11 @@ export function App() {
   return (
     <div className="App">
       <h1>Thank you for taking the time to view this project!</h1>
+      <h3>I had to spread out my work over over a few days because:</h3>
+      <ul>
+        <li>I'm working full time.</li>
+        <li>I haven't used React in Months</li>
+      </ul>
       <div>{userInfo}</div>
     </div>
   );
