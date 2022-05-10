@@ -72,3 +72,17 @@ p {
     visibility: hidden;
     margin: 0;
 }
+.hidden-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    padding: 25px;
+}
+.hidden-p {
+    font-size: 12px;
+    margin: 10px;
+}
+.hidden-span {
+    font-size: 12px;
+}

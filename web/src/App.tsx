@@ -8,6 +8,7 @@ export function App() {
   const [langFiltered, setLangFiltered] = useState([]);
   const [displayedList, setDisplayedList] = useState([]);
   const [languageFilter, setLanguageFilter] = useState(false);
+  const [collapse, setCollapse] = useState(false);
   const [visible, setVisible] = useState(false);
 
 
@@ -47,19 +48,25 @@ export function App() {
     console.log(lang)
   }
 
+  const collapseFunction = () => {
+    if(collapse === false) setCollapse(true);
+    if(collapse === true) setCollapse(false);
+  }
+
 
   const userInfo = displayedList.map((repo, idx) => {
     const { name, description, language, forks_count, owner } = repo;
 
     return (
       <div key={idx}>
-        <div className="row card">
+        <div 
+          onClick={() => {collapseFunction()}}
+          className="row card">
           <img className="image" src={owner.avatar_url} alt="" />
             <div className="col justify-content-start">
               <p className="gray-400"><span className="text-black-50">Repository Name: </span>{name}</p>
               <p className="gray-400"><span className="text-black-50">Repository Description: </span>{description ? description : "No Description"}</p>
               <p className="gray-400"><span className="text-black-50">Repository Forks: </span>{forks_count}</p>
-              <p className="gray-400"><span className="text-black-50">Date: </span>{repo.created_at}</p>
               <span className="text-black-50 gray-400">Repository Language: </span>
               <button 
                 onClick={(e) => {filterLanguage(e, sorted)}}
@@ -72,9 +79,12 @@ export function App() {
                      Original List
               </button>
             </div>
-        </div>
-        <div>
-
+            <div 
+              className={collapse === false ? "collapse" : "collapse.show hidden-container"}>
+              <p className="gray-400 hidden-p"><span className="text-black-50 hidden-span">Recent Commit Date: </span>{repo.created_at}</p>
+              <p className="gray-400 hidden-p"><span className="text-black-50 hidden-span">Author: </span>{owner.login}</p>
+              <p className="gray-400 hidden-p"><span className="text-black-50 hidden-span">Message: </span>Happy Coding!!!</p>
+            </div>
         </div>
       </div>
     );
