@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export function App() {
   const [repos, setRepos] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+  const [sorted, setSorted] = useState([]);
   const [langFiltered, setLangFiltered] = useState([]);
   const [displayedList, setDisplayedList] = useState([]);
   const [languageFilter, setLanguageFilter] = useState(false);
@@ -21,22 +21,21 @@ export function App() {
       .get('http://localhost:4000/repos')
       .then((res) => {
         setRepos(res.data);
-        filterRepos(res.data);
+        sortRepos(res.data);
         setLanguageFilter(false);
       })
       .catch((err) => console.log(err));
   };
   console.log(repos);
 
-  // Filter the repos so only repos with fork set to false display
-  const filterRepos = (array) => {
-    const filteredRepos = array?.filter((el) => el.fork === false)
-    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    setFiltered(filteredRepos);
-    setDisplayedList(filteredRepos);
+  // Sort the repos in reverse chronological order
+  const sortRepos = (array) => {
+    const sortedRepos = array.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    setSorted(sortedRepos);
+    setDisplayedList(sortedRepos);
     setLanguageFilter(true);
   };
-  console.log(filtered);
+  console.log(sorted);
 
 
   // Filter by language
@@ -57,13 +56,13 @@ export function App() {
         <div className="row card">
           <img className="image" src={owner.avatar_url} alt="" />
             <div className="col justify-content-start">
-              <p className="gray-100"><span className="text-black-50">Repository Name: </span>{name}</p>
-              <p className="gray-100"><span className="text-black-50">Repository Description: </span>{description}</p>
-              <p className="gray-100"><span className="text-black-50">Repository Forks: </span>{forks_count}</p>
-              <p className="gray-100"><span className="text-black-50">Date: </span>{repo.created_at}</p>
-              <span className="text-black-50 gray-100">Repository Language: </span>
+              <p className="gray-400"><span className="text-black-50">Repository Name: </span>{name}</p>
+              <p className="gray-400"><span className="text-black-50">Repository Description: </span>{description ? description : "No Description"}</p>
+              <p className="gray-400"><span className="text-black-50">Repository Forks: </span>{forks_count}</p>
+              <p className="gray-400"><span className="text-black-50">Date: </span>{repo.created_at}</p>
+              <span className="text-black-50 gray-400">Repository Language: </span>
               <button 
-                onClick={(e) => {filterLanguage(e, filtered)}}
+                onClick={(e) => {filterLanguage(e, sorted)}}
                 className="btn btn-secondary">
                      { language}
               </button>

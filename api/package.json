@@ -36,5 +36,6 @@
     "prettier": "^2.5.1",
     "ts-node-dev": "^1.1.8",
     "typescript": "~4.5.5"
-  }
+  },
+  "build": "tsc --project ./"
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
 
 .App {
     display: flex;
@@ -5,11 +7,14 @@
     justify-content: center;
     align-items: center;
     padding: 50px;
+    background-color: rgb(234, 206, 149);
 }
 h1 {
     text-transform: uppercase;
     font-weight: 700;
     font-size: 30px !important;
+    color: #706349;
+    font-family: 'Lato', sans-serif;
 }
 .row {
     display: flex;
@@ -35,17 +40,24 @@ h1 {
 .card:hover {
     transform: scale(1.02);
 }
-.gray-100 {
+.text-black-50 {
     text-transform: uppercase;
     font-weight: 700;
+    font-family: 'Lato', sans-serif;
+}
+.gray-400 {
+    font-family: 'Lato', sans-serif;
 }
 p {
-    color: whitesmoke;
+    color: rgb(64, 61, 61);
     font-weight: 400;
+    font-family: 'Lato', sans-serif;
+    text-transform: capitalize;
 }
 .btn {
     margin: 10px 0;
     color: rgb(237, 190, 104);
+    font-family: 'Lato', sans-serif;
 }
 .btn:hover {
     cursor: pointer;
